@@ -1,0 +1,29 @@
+{
+  "name": "MEAN-NG2",
+  "version": "1.0.0",
+  "description": "Study-Mean-stack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phamtr/MEAN-NG2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phamtr/MEAN-NG2/issues"
+  },
+  "homepage": "https://github.com/phamtr/MEAN-NG2#readme",
+  "dependencies": {
+    "angular2-flash-messages": "^2.0.5",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.1",
+    "mongoose": "^5.0.3"
+  }
+}
