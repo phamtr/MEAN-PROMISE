@@ -57,38 +57,36 @@
 
 
 <div *ngIf="!newPost">
-  <div class="panel panel-primary">
+  <!-- Panel OuterLayer -->
+  <div class="panel panel-primary" *ngFor="let blog of blogPosts">
       <div class="panel-heading">
-          <h3 class="panel-title">Post Title</h3>
+          <h3 class="panel-title">{{ blog.title }}</h3>
         </div>
-        <div class="panel-body">Ngày 11/2, lãnh đạo Đại học Kinh tế - Kỹ thuật công nghiệp nơi Hoàng Đức Hải theo học cho hay, Ban giám hiệu nhà trường thống nhất sẽ trao tặng bằng tốt nghiệp danh dự cho nam sinh.
-            
-            “Đây là lần đầu tiên trường quyết định trao bằng tốt nghiệp danh dự cho một sinh viên không may qua đời khi chưa tốt nghiệp”, ông Nguyễn Ngọc Khương, Phó hiệu trưởng Đại học Kinh tế - Kỹ thuật công nghiệp cho biết.
-         </div>
+        <div class="panel-body">{{ blog.body }}</div>
 
  
 
   <div class="panel-footer">
-<strong>Posted by:</strong> Truong
+<strong>Posted by:</strong> {{ blog.createdBy }}
 <br />
-<strong>Date:</strong> February 11, 2018
+<strong>Date:</strong> {{ blog.createdAt | date: 'MMM dd, yyyy'}}
 <br />
-<div>
-    <strong>Likes: </strong>25
+<div *ngIf="username === blog.createdBy">
+    <strong>Likes: </strong>{{ blog.likes }}
     <br />
-    <strong>DisLikes: </strong>15
+    <strong>DisLikes: </strong>{{ blog.dislikes }}
 </div>
-<a href=""><button type="button" name="button" class="btn btn-sm btn-info">Edit</button> </a>
-<a href=""><button type="button" name="button" class="btn btn-sm btn-danger">Delete</button> </a>
+<a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.createdBy"><button type="button" name="button" class="btn btn-sm btn-info">Edit</button> </a>
+<a [routerLink]="['/delete-blog/', blog._id]" *ngIf="username === blog.createdBy"><button type="button" name="button" class="btn btn-sm btn-danger">Delete</button> </a>
 
 <!-- Likes Dropdown -->
 <div class="dropdown">
-<button type="button" name="button" class="btn btn-sm btn-success">
+<button type="button" name="button" class="btn btn-sm btn-success" *ngIf="username !== blog.createdBy">
   <span class="glyphicon glyphicon-thumbs-up">&nbsp;</span>Likes: 21
 </button>
 <br />
 <div class="dropdown-content">
-  <a href="#">Truong</a>
+  <a href="#">Truong123</a>
   <a href="#">Jinder</a>
   <a href="#">patel</a>
 
@@ -96,12 +94,12 @@
 </div>
 <!-- Dislikes Dropdown -->
 <div class="dropdown">
-    <button type="button" name="button" class="btn btn-sm btn-warning">
+    <button type="button" name="button" class="btn btn-sm btn-warning" *ngIf="username !== blog.createdBy">
       <span class="glyphicon glyphicon-thumbs-down">&nbsp;</span>Dislikes: 15
     </button>
     <br />
     <div class="dropdown-content">
-      <a href="#">Truong</a>
+      <a href="#">Truong123</a>
       <a href="#">Jinder</a>
       <a href="#">patel</a>
     </div>

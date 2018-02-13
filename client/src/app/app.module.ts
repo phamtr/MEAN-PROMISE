@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';  // <-- #1 import module
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';  // <-- #1 import module
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -16,6 +16,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './auth.guard';
 import { NotAuthGuard } from './notAuth.guard';
 import { BlogComponent } from './blog/blog.component';
+import { EditBlogComponent } from './edit-blog/edit-blog.component';
 
 @NgModule({
   declarations: [
@@ -26,12 +27,14 @@ import { BlogComponent } from './blog/blog.component';
     RegisterComponent,
     LoginComponent,
     ProfileComponent,
-    BlogComponent
+    BlogComponent,
+    EditBlogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpModule,
     FlashMessagesModule.forRoot()
 

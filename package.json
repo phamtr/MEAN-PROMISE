@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/phamtr/MEAN-NG2#readme",
   "dependencies": {
-    "angular2-flash-messages": "^2.0.5",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
