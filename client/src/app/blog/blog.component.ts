@@ -15,9 +15,12 @@ export class BlogComponent implements OnInit {
   newPost=false;
   loadingBlogs = false;
   form;
+  commentForm;
   processing = false;
   username;
   blogPosts;
+  newComment = [];
+  enabledComments = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,6 +29,7 @@ export class BlogComponent implements OnInit {
     private router: Router
   ) {
     this.createNewBlogForm();
+    this.createCommentForm();
    }
 
 createNewBlogForm(){
@@ -42,6 +46,21 @@ createNewBlogForm(){
       Validators.minLength(5),
     ])]
   })
+}
+createCommentForm(){
+  this.commentForm = this.formBuilder.group({
+    comment: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(200)
+    ])]
+  })
+}
+enableCommentForm(){
+  this.commentForm.get('comment').enable();
+}
+disableCommentForm(){
+  this.commentForm.get('comment').disable();
 }
 
 disableFormNewBlogForm(){
@@ -72,8 +91,16 @@ alphaNumericValidation(controls){
       this.loadingBlogs = false;
     }, 4000);
   }
-  draftComment(){
-    
+  draftComment(id){
+    this.newComment = [];
+    this.newComment.push(id);
+  }
+  cancelSubmission(id){
+    const index = this.newComment.indexOf(id);
+    this.newComment.splice(index, 1);
+    this.commentForm.reset();
+    this.enableCommentForm();
+    this.processing = false;
   }
 
   onBlogSubmit(){
@@ -112,6 +139,26 @@ alphaNumericValidation(controls){
       this.blogPosts = data.blogs;
     })
   }
+  dislikeBlog(id){
+    this.blogService.dislikeBlog(id).subscribe(data =>{
+    this.getAllBlogs();
+    });
+  }
+  likeBlog(id){
+    this.blogService.likeBlog(id).subscribe(data =>{
+    this.getAllBlogs();
+    });
+  }
+postComment(id){
+
+}
+expand(id){
+  this.enabledComments.push(id);
+}
+collapse(id){
+  const index = this.enabledComments.indexOf(id);
+  this.enabledComments.splice(index, 1);
+}
 
   ngOnInit() {
     this.authService.getProfile().subscribe(profile =>{

@@ -104,7 +104,7 @@ userSchema.pre('save', function(next){
     if (!this.isModified('password'))
     return next();
 var user = this;
-    bcrypt.hash(user.password, 10, function(err, hash){
+    bcrypt.hash(user.password, null, null, (err, hash) =>{
         if(err) return next(err);
         user.password = hash;
         next();

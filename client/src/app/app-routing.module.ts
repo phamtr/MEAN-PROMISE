@@ -8,9 +8,11 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { BlogComponent } from './blog/blog.component';
 import { EditBlogComponent } from './edit-blog/edit-blog.component';
+import { DeleteBlogComponent } from './delete-blog/delete-blog.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './auth.guard';
 import { NotAuthGuard } from './notAuth.guard';
+import { PublicProfileComponent } from './public-profile/public-profile.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -19,7 +21,9 @@ const appRoutes: Routes = [
    { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]  },
    { path: 'blog', component: BlogComponent, canActivate: [AuthGuard] },
    { path: 'edit-blog/:id', component: EditBlogComponent, canActivate: [AuthGuard] },
+   { path: 'delete-blog/:id', component: DeleteBlogComponent, canActivate: [AuthGuard] },
    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+   { path: 'user/:username', component: PublicProfileComponent, canActivate: [AuthGuard] },
     { path: '**', component: HomeComponent }
     
   ];

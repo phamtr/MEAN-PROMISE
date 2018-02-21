@@ -17,8 +17,8 @@ createAuthenticationHeaders(){
 this.loadToken();
 this.options = new RequestOptions({
   headers: new Headers({
-    'Content-Type': 'application/json',
-    'authorization': this.authToken
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Authorization': this.authToken
   })
 });
 }
@@ -59,6 +59,12 @@ this.user = user;
     this.createAuthenticationHeaders();
     return this.http.get(this.domain + 'authentication/profile', this.options).map(res => res.json());
   }
+
+getPublicProfile(username){
+  this.createAuthenticationHeaders();
+  return this.http.get(this.domain + 'authentication/publicProfile/' + username, this.options).map(res =>res.json());
+}
+
   loggedIn(){
     return tokenNotExpired();
   }
