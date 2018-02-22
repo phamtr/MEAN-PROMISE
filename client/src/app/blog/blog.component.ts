@@ -150,7 +150,19 @@ alphaNumericValidation(controls){
     });
   }
 postComment(id){
+this.disableCommentForm();
+this.processing = true;
+const comment = this.commentForm.get('comment').value;
+this.blogService.postComment(id, comment).subscribe(data =>{
+  this.getAllBlogs();
+  const index = this.newComment.indexOf(id);
+  this.newComment.splice(index, 1);
+  this.enableCommentForm();
+  this.commentForm.reset();
+  this.processing = false;
+  if(this.enabledComments.indexOf(id)<0) this.expand(id);
 
+});
 }
 expand(id){
   this.enabledComments.push(id);
