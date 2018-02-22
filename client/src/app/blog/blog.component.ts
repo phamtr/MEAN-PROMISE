@@ -92,6 +92,7 @@ alphaNumericValidation(controls){
     }, 4000);
   }
   draftComment(id){
+    this.commentForm.reset();
     this.newComment = [];
     this.newComment.push(id);
   }

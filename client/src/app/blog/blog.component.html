@@ -111,7 +111,7 @@
    <div *ngIf="newComment.indexOf(blog._id) > -1">
     <form [formGroup]="commentForm">
       <textarea name="comment" id="" cols="30" rows="10" class="form-control" formControlName="comment"></textarea>
-      <div [ngClass]="">
+      <div [ngClass]="{'has-sucess': !commentForm.controls.comment.errors && commentForm.controls.dirty, 'has-error': commentForm.controls.errors && commentForm.controls.dirty}">
         <ul class="help-block">
             <li *ngIf="commentForm.controls.comment.errors?.required && commentForm.controls.comment.dirty">This field is required.</li>
             <li *ngIf="(commentForm.controls.comment.errors?.maxlenth && commentForm.controls.comment.dirty ||
@@ -124,7 +124,7 @@
     </form> 
   </div>
 </li>
-<li *ngIf="enabledComments.indexOf(blog._id) === -1 && blog.comments.lenth > 0" class="list-group-item">
+<li *ngIf="(enabledComments.indexOf(blog._id) === -1) && (blog.comments.length > 0)" class="list-group-item">
  <span (click)="expand(blog._id)">Show comments&nbsp;&nbsp;
    <div class="glyphicon glyphicon-comment"></div>
  </span>
@@ -136,7 +136,7 @@
 </li>
 <div *ngIf="enabledComments.indexOf(blog._id) > -1">
   <li *ngFor="let comment of blog.comments" class="list-group-item">
-    <strong>{{ comment.comentator }}:</strong>{{ comment.comment}}
+    <strong>{{ comment.commentator }}:</strong>{{ comment.comment}}
   </li>
 </div>
 
