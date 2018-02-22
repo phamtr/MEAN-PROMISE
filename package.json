@@ -1,9 +1,10 @@
 {
-  "name": "MEAN-NG2",
+  "name": "mean-ang2",
   "version": "1.0.0",
   "description": "Study-Mean-stack",
   "main": "index.js",
   "scripts": {
+    "build": "cd client && ng build --prod cd.. && node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,5 +25,8 @@
     "express": "^4.16.2",
     "jsonwebtoken": "^8.1.1",
     "mongoose": "^5.0.3"
+  },
+  "devDependencies": {
+    "@angular/cli": "^1.7.1"
   }
 }

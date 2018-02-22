@@ -10,7 +10,7 @@ import { AuthGuard } from '../auth.guard';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  form: FormGroup;
+  form;
   message;
   messageClass;
   processing = false;
