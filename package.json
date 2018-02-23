@@ -4,6 +4,7 @@
   "description": "Study-Mean-stack",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "build": "cd client && ng build --prod cd.. && node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

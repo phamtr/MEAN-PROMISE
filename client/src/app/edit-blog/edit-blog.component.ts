@@ -19,7 +19,7 @@ export class EditBlogComponent implements OnInit {
 
   constructor(private location: Location
   , private activatedRoute: ActivatedRoute
-, private blogService: BlogService,
+, public blogService: BlogService,
 private router: Router) { }
 updateBlogSubmit(){
 this.processing = true;

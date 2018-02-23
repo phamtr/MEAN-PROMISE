@@ -17,7 +17,7 @@ export class PublicProfileComponent implements OnInit {
   message;
   messageClass;
 
-  constructor(private authService: AuthService
+  constructor(public authService: AuthService
   , private router: Router
   , private activatedRoute: ActivatedRoute
   ) { }

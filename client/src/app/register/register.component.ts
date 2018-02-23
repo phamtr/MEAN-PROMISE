@@ -17,7 +17,7 @@ emailValid;
 emailMessage;
 usernameValid;
 usernameMessage;
-constructor(private formBuilder: FormBuilder, private authService: AuthService
+constructor(private formBuilder: FormBuilder, public authService: AuthService
 , private router: Router) {
   this.createForm();
  }

@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   processing = false;
   previousUrl;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService
+  constructor(private formBuilder: FormBuilder, public authService: AuthService
     , private router: Router, private authGuard: AuthGuard) { this.createForm(); }
   createForm(){
     this.form = this.formBuilder.group({

@@ -16,7 +16,7 @@ export class DeleteBlogComponent implements OnInit {
   blog;
   currentUrl;
 
-  constructor(private blogService: BlogService,
+  constructor(public blogService: BlogService,
   private activatedRoute: ActivatedRoute, private router: Router) { }
 
   deleteBlog(){
