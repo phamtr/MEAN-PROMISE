@@ -7,7 +7,7 @@ import { AuthHttp, AuthConfig, tokenNotExpired } from 'angular2-jwt';
 @Injectable()
 export class AuthService {
 
-  domain = "http://localhost:8080/";
+  domain = "";
   authToken;
   user;
   options;
