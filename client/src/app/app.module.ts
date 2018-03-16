@@ -14,11 +14,13 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './auth.guard';
+import { ProductService } from './product.service';
 import { NotAuthGuard } from './notAuth.guard';
 import { BlogComponent } from './blog/blog.component';
 import { EditBlogComponent } from './edit-blog/edit-blog.component';
 import { DeleteBlogComponent } from './delete-blog/delete-blog.component';
 import { PublicProfileComponent } from './public-profile/public-profile.component';
+import { LogincompanyComponent } from './logincompany/logincompany.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { PublicProfileComponent } from './public-profile/public-profile.componen
     BlogComponent,
     EditBlogComponent,
     DeleteBlogComponent,
-    PublicProfileComponent
+    PublicProfileComponent,
+    LogincompanyComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,7 @@ import { PublicProfileComponent } from './public-profile/public-profile.componen
     FlashMessagesModule.forRoot()
 
   ],
-  providers: [AuthService, AuthGuard, NotAuthGuard, BlogService],
+  providers: [AuthService, AuthGuard, NotAuthGuard, BlogService, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
