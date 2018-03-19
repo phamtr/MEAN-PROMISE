@@ -98,7 +98,12 @@ let usernameLenthChecker = (username) => {
 const userSchema = new mongoose.Schema({
 email: { type: String, required: true, unique: true, lowercase: true, validate: emailValidators },
 username: { type: String, required: true, unique: true, lowercase: true, validate: usernameValidators },
-password: { type: String, required: true, validate: passwordValidators }
+password: { type: String, required: true, validate: passwordValidators },
+address: { type: String},
+telephone: { type: String},
+companyname: { type: String},
+admin: {type: Boolean},
+active: {type: Boolean}
 });
 userSchema.pre('save', function(next){
     if (!this.isModified('password'))

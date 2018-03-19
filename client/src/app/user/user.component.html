@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="col-md-12">
+    <h1>User List</h1>
+      <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="text-center">ID</th>
+        <th class="text-center">Username</th>
+        <th class="text-center">Email</th>
+        <th class="text-center">Address</th>
+        <th class="text-center">Telephone</th>
+        <th class="text-center">Companyname</th>
+        <th class="text-center">admin</th>
+        <th class="text-center">Actvate</th>
+        <th class="text-center">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.address }}</td>
+        <td>{{ user.telephone }}</td>
+        <td>{{ user.companyname }}</td>
+        <td>{{ user.admin }}</td>
+        <td>{{ user.activate }}</td>
+        <td>
+          <button class="btn btn-info"
+                        (click)="showEdituserForm(user)">
+                       <i class="fa fa-edit"></i>
+              </button>
+          <button class="btn btn-danger"
+                       (click)="removeuser(user)">
+                       <i class="fa fa-minus"></i>
+            </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-success"
+               (click)="showAdduserForm()"><i class="fa fa-plus"></i></button>
+  <br />
+  <br />
+
+  <form *ngIf="userForm">
+    <h2>Add New user</h2>
+    <p>ID: <input type="text"
+                           name="id"
+                           [(ngModel)]="newuser.id" /></p>
+    <p>Name: <input type="text"
+                                 name="name"
+                                 [(ngModel)]="newuser.name" /></p>
+    <p>Description: <input type="text"
+                                          name="description"
+                                          [(ngModel)]="newuser.description" /></p>
+    <p>Price: <input type="text"
+                                name="price"
+                                [(ngModel)]="newuser.price" /></p>
+    <p>
+      <button type="button"
+                   class="btn btn-primary"
+                   (click)="saveuser(newuser)">Submit</button>
+      <button type="button"
+                   class="btn btn-warning"
+                   (click)="cancelNewuser()">Cancel</button>
+    </p>
+   </form>
+
+    <form *ngIf="edituserForm">
+    <h2>Edit user Details</h2>
+    <p>ID: <input type="text"
+                           name="id"
+                           [(ngModel)]="editeduser.id" /></p>
+    <p>Name: <input type="text"
+                                 name="name"
+                                 [(ngModel)]="editeduser.name" /></p>
+    <p>Description: <input type="text"
+                                          name="description"
+                                          [(ngModel)]="editeduser.description" /></p>
+    <p>Price: <input type="text"
+                                name="price"
+                                [(ngModel)]="editeduser.price" /></p>
+    <p>
+      <button type="button"
+                   class="btn btn-primary"
+                   (click)="updateuser(editeduser)">Submit</button>
+      <button type="button"
+                   class="btn btn-warning"
+                   (click)="cancelEdits()">Cancel</button>
+    </p>
+   </form>
+  </div>
+</div>

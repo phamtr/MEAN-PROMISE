@@ -21,6 +21,7 @@ import { EditBlogComponent } from './edit-blog/edit-blog.component';
 import { DeleteBlogComponent } from './delete-blog/delete-blog.component';
 import { PublicProfileComponent } from './public-profile/public-profile.component';
 import { LogincompanyComponent } from './logincompany/logincompany.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { LogincompanyComponent } from './logincompany/logincompany.component';
     EditBlogComponent,
     DeleteBlogComponent,
     PublicProfileComponent,
-    LogincompanyComponent
+    LogincompanyComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
