@@ -16,8 +16,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
-        <td>{{ user.id }}</td>
+      <tr *ngFor="let user of userPosts">
+        <td>{{ user._id }}</td>
         <td>{{ user.username }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.address }}</td>
@@ -28,68 +28,19 @@
         <td>
           <button class="btn btn-info"
                         (click)="showEdituserForm(user)">
-                       <i class="fa fa-edit"></i>
+                       <i class="glyphicon glyphicon-edit"></i>
               </button>
           <button class="btn btn-danger"
                        (click)="removeuser(user)">
-                       <i class="fa fa-minus"></i>
+                       <i class="glyphicon glyphicon-minus"></i>
             </button>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <button class="btn btn-success"
-               (click)="showAdduserForm()"><i class="fa fa-plus"></i></button>
-  <br />
-  <br />
 
-  <form *ngIf="userForm">
-    <h2>Add New user</h2>
-    <p>ID: <input type="text"
-                           name="id"
-                           [(ngModel)]="newuser.id" /></p>
-    <p>Name: <input type="text"
-                                 name="name"
-                                 [(ngModel)]="newuser.name" /></p>
-    <p>Description: <input type="text"
-                                          name="description"
-                                          [(ngModel)]="newuser.description" /></p>
-    <p>Price: <input type="text"
-                                name="price"
-                                [(ngModel)]="newuser.price" /></p>
-    <p>
-      <button type="button"
-                   class="btn btn-primary"
-                   (click)="saveuser(newuser)">Submit</button>
-      <button type="button"
-                   class="btn btn-warning"
-                   (click)="cancelNewuser()">Cancel</button>
-    </p>
-   </form>
-
-    <form *ngIf="edituserForm">
-    <h2>Edit user Details</h2>
-    <p>ID: <input type="text"
-                           name="id"
-                           [(ngModel)]="editeduser.id" /></p>
-    <p>Name: <input type="text"
-                                 name="name"
-                                 [(ngModel)]="editeduser.name" /></p>
-    <p>Description: <input type="text"
-                                          name="description"
-                                          [(ngModel)]="editeduser.description" /></p>
-    <p>Price: <input type="text"
-                                name="price"
-                                [(ngModel)]="editeduser.price" /></p>
-    <p>
-      <button type="button"
-                   class="btn btn-primary"
-                   (click)="updateuser(editeduser)">Submit</button>
-      <button type="button"
-                   class="btn btn-warning"
-                   (click)="cancelEdits()">Cancel</button>
-    </p>
-   </form>
-  </div>
+  
+     </div>
 </div>
+
