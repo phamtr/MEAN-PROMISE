@@ -187,5 +187,43 @@ module.exports = (router) => {
         }).sort({ '_id': -1});
     });
 
+    router.delete('/deleteUser/:id', (req, res) =>{
+        if(!req.params.id){
+            res.json({ success: false, message: 'No id provided'});
+        }else{
+            Blog.findOne({_id: req.params.id }, (err, user) =>{
+        if(err){
+            res.json({ success: false, message: 'Invalid id'});
+        }else{
+            if(!user){
+                res.json({ success: false, message: 'Id was not found'});
+            }else{
+                User.findOne({ admin: true }, (err, user) => {
+                    if( err )
+                    return done(err);
+              
+                  if( !user ) {
+                    let content = {
+                      success: false,
+                      message: 'You have no right'
+                    };
+                    res.send(content);
+                    return;
+                  }
+                  
+        
+                });
+                user.remove((err) =>{
+                    if( err )
+                    return done(err);
+                    res.json({ success: true, message: 'user deleted!'});            
+                });
+            }
+        }
+            });
+        }
+            });
+        
+
     return router;
 }

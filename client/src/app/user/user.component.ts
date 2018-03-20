@@ -15,6 +15,10 @@ userPosts;
     })
   }
 
+  deleteUser(id){
+
+  }
+
   ngOnInit() {
     this.getAllUsers();
   }

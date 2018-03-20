@@ -15,6 +15,7 @@ import { AuthGuard } from './auth.guard';
 import { NotAuthGuard } from './notAuth.guard';
 import { PublicProfileComponent } from './public-profile/public-profile.component';
 import { LogincompanyComponent } from './logincompany/logincompany.component';
+import { UpdateUserComponent } from './update-user/update-user.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -32,6 +33,7 @@ const appRoutes: Routes = [
    { path: 'edit-blog/:id', component: EditBlogComponent, canActivate: [AuthGuard] },
    { path: 'delete-blog/:id', component: DeleteBlogComponent, canActivate: [AuthGuard] },
    { path: 'user', component: UserComponent, canActivate: [AuthGuard] }, 
+   { path: 'update-user/:id', component: UpdateUserComponent, canActivate: [AuthGuard] }, 
    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
    { path: 'user/:username', component: PublicProfileComponent, canActivate: [AuthGuard] },
     { path: '**', component: HomeComponent }

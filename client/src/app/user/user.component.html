@@ -13,11 +13,12 @@
         <th class="text-center">admin</th>
         <th class="text-center">Actvate</th>
         <th class="text-center">&nbsp;</th>
+        <th class="text-center">&nbsp;</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of userPosts">
-        <td>{{ user._id }}</td>
+      <tr *ngFor="let user of userPosts; let i = index">
+        <td>{{ i+1 }}</td>
         <td>{{ user.username }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.address }}</td>
@@ -26,13 +27,13 @@
         <td>{{ user.admin }}</td>
         <td>{{ user.activate }}</td>
         <td>
-          <button class="btn btn-info"
-                        (click)="showEdituserForm(user)">
-                       <i class="glyphicon glyphicon-edit"></i>
+          <button [routerLink]="['/update-user/', user._id]"  class="btn btn-info">
+                       <span class="glyphicon glyphicon-plus">Edit</span>
               </button>
-          <button class="btn btn-danger"
-                       (click)="removeuser(user)">
-                       <i class="glyphicon glyphicon-minus"></i>
+        </td>
+        <td>
+          <button  class="btn btn-danger" (click)="deleteUser(id)">
+                       <i class="glyphicon glyphicon-minus">-</i>
             </button>
         </td>
       </tr>
