@@ -1,62 +1,26 @@
-
-<h2 class="page-header">update-user</h2>
+<h2 class="page-header">Update User</h2>
 
 <div class="row show-hide-message" *ngIf="message">
 <div [ngClass]="messageClass">
 {{message}}
 </div>
 </div>
-<form [formGroup]="form" (submit)="onRegisterSubmit()">
-  <div class="form-group">
-    <label class="center-block">Username </label>
-    <div [ngClass]="{'has-error': (form.controls.username.errors && form.controls.username.dirty) || (!usernameValid
-    && form.controls.username.dirty) , 'has-success': !form.controls.username.errors}">
-    <input type="text" name="username" class="form-control" formControlName="username" placeholder="*Username" (blur)="checkUsername()">
-      <ul class="help-block">
-        <li *ngIf="form.controls.username.errors?.required && form.controls.username.dirty">This field is required</li>
-        <li *ngIf="form.controls.username.errors?.minlength || form.controls.username.errors?.maxlength">Length of username = 3-15</li>
-        <li *ngIf="form.controls.username.errors?.validateUsername && form.controls.username.dirty">Name must not have
-          any special characters</li>
-          <li *ngIf="usernameMessage">{{ usernameMessage }}</li>
-      </ul>
-    </div>
-  </div>
 
+<form (submit)="updateUserSubmit()" *ngIf="!loading">
   <div class="form-group">
-    <label class="center-block">Email </label>
-    <div [ngClass]="{'has-error': (form.controls.email.errors && form.controls.email.dirty) || (!emailValid
-    && form.controls.email.dirty), 'has-success': !form.controls.email.errors}">
-      <input type="text" name="email" class="form-control" formControlName="email" placeholder="Email" (blur)="checkEmail()">
-      <ul class="help-block">
-        <li *ngIf="form.controls.email.errors?.required && form.controls.email.dirty">This field is required</li>
-        <li *ngIf="form.controls.email.errors?.minlength || form.controls.email.errors?.maxlength">Length of email = 5-30</li>
-        <li *ngIf="form.controls.email.errors?.validateEmail && form.controls.email.dirty">Email must be valid</li>
-        <li *ngIf="emailMessage">{{ emailMessage }}</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label class="center-block">Password  </label>
-    <div [ngClass]="{'has-error': (form.controls.password.errors && form.controls.password.dirty) , 'has-success': !form.controls.password.errors}">  
-    <input type="password" name="password" class="form-control" formControlName="password" placeholder="*Password">
-      <ul class="help-block">
-        <li *ngIf="form.controls.password.errors?.required && form.controls.password.dirty">This field is required</li>
-        <li *ngIf="form.controls.password.errors?.minlength || form.controls.password.errors?.maxlength">Length of password = 8-35</li>
-        <li *ngIf="form.controls.password.errors?.validatePassword && form.controls.password.dirty">Must be at least one upper, lower, special character, and number</li>
-      </ul>
-    </div>
+    <label for="Email">Email</label>
+    <input [disabled]="processing" type="text" name="email" class="form-control"
+    [(ngModel)]="user.email" />
   </div>
   <div class="form-group">
-    <label class="center-block">Confirm Password</label>
-    <div [ngClass]="{'has-error': (form.controls.confirm.errors && form.controls.confirm.dirty || form.errors?.matchingPasswords && form.controls.confirm.dirty) , 'has-success': !form.controls.confirm.errors}">  
-    <input type="password" name="confirm" class="form-control" formControlName="confirm" placeholder="*Confirm Password">
-      <ul class="help-block">
-        <li *ngIf="form.controls.confirm.errors?.required && form.controls.confirm.dirty">This field is required</li>
-        <li *ngIf="form.controls.confirm.errors?.minlength || form.controls.confirm.errors?.maxlength">Length of confirm = 8-35</li>
-        <li *ngIf="form.errors?.matchingPasswords && form.controls.confirm.dirty">Password do not match</li>
-        </ul>
-    </div>
+    <label for="Username">Username</label>
+    <input [disabled]="processing" type="text" name="username" class="form-control"
+    [(ngModel)]="user.username" />
   </div>
-  <input [disabled]="!form.valid || processing || !emailValid || !usernameValid" type="submit" class="btn btn-primary" value="Update user info" />
+  
+  <div class="form-group">
+      <a [routerLink]="['/delete-user/', user._id]"><button [disabled]="processing" type="button" name="button" class="btn btn-danger">Delete</button></a>
+      <button [disabled]="processing" type="button" name="button" class="btn btn-success" (click)="goBack()">Go Back</button>
+      <button [disabled]="processing" type="submit" name="save" class="btn btn-info">Save Changes</button>
+    </div>
 </form>

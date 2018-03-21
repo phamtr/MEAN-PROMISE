@@ -220,10 +220,75 @@ module.exports = (router) => {
                 });
             }
         }
-            });
-        }
-            });
+    });
+   }
+});
         
+ router.put('/updateUser', (req, res)=>{
+                if(!req.body._id){
+                    res.json({ success: false, message: 'No user id provided'});
+                }else{
+                    User.findOne({ _id: req.body._id}, (err, user) =>{
+                        if(err){
+                            res.json({ success: false, message: 'Not a valid user id'});
+                        }else{
+                            if(!user){
+                                res.json({ success: false, message: 'User id was not found.'});
+                            }else{
+                                User.findOne({ _id: req.decoded.userId}, (err, user) =>{
+                                    if(err){
+                                        res.json({ success: false, message: err});
+                                    }else{
+                                        if(!user){
+                                            res.json({ success: false, message: 'Unable to authenticate user.'});
+                                        }else{
+                                            if(user.admin !== true){
+                                                res.json({ success: false, message: 'You are not authorized to edit this blog post.'});
+                                            }else{
+                                                user.email = req.body.email;
+                                                user.username = req.body.username;
+                                                user.password = req.body.password;
+                                                user.address = req.body.username;
+                                                user.telephone = req.body.telephone;
+                                                user.companyname = req.body.companyname;
+                                                user.admin = req.body.admin;
+                                                user.active = req.body.active;
 
+                                                user.save((err) =>{
+                                                    if(err){
+                                                        res.json({ success: false, message: err});
+                                                    }else{
+                                                        res.json({ success: true, message: 'User Updated!'});
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+                   
+            router.get('/singleUser/:id', (req, res) =>{
+                if(!req.params.id){
+                    res.json({ success: false, message: 'No user ID was provided.'});
+                }else{
+                    User.findOne({ _id: req.params.id}, (err, user) =>{
+                        if(err){
+                            res.json({ success: false, message: err});
+                        }else{
+                            if(!user){
+                                res.json({ success: false, message: 'Not a valid user id.'});
+                            }else{
+                                res.json({ success: true, user: user});
+                            }
+                        }
+                
+                      });
+                }
+             
+            });
     return router;
 }
