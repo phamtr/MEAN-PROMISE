@@ -105,6 +105,7 @@ companyname: { type: String},
 admin: {type: Boolean},
 active: {type: Boolean}
 });
+
 userSchema.pre('save', function(next){
     if (!this.isModified('password'))
     return next();

@@ -13,22 +13,117 @@ import { Location } from '@angular/common';
 export class UpdateUserComponent implements OnInit {
   message;
   messageClass;
-  user;
+  euser;
   processing = false;
   currentUrl;
   loading = true;
-
-  constructor(private location: Location
+  form;
+emailValid;
+emailMessage;
+usernameValid;
+usernameMessage;
+constructor(private location: Location
   , private activatedRoute: ActivatedRoute
-, public authService: AuthService,
-private router: Router) { }
-updateUserSubmit(){
-this.processing = true;
-this.authService.editUser(this.user).subscribe(data =>{
+,private formBuilder: FormBuilder, public authService: AuthService
+, private router: Router) {
+  this.createForm();
+ }
+
+createForm(){
+  this.form = this.formBuilder.group({
+    email: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(30),
+      this.validateEmail
+    ])],
+    username: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(15),
+      this.validateUsername
+    ])],
+    password: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(35),
+      this.validatePassword
+    ])],
+    confirm: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(35)
+    ])]
+  }, { validator: this.matchingPasswords('password', 'confirm')})
+}
+
+disableForm(){
+  this.form.controls['email'].disable();
+  this.form.controls['username'].disable();
+  this.form.controls['password'].disable();
+  this.form.controls['confirm'].disable();
+
+}
+enableForm(){
+  this.form.controls['email'].enable();
+  this.form.controls['username'].enable();
+  this.form.controls['password'].enable();
+  this.form.controls['confirm'].enable();
+
+}
+
+ validateEmail(controls){
+ const regExp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+if(regExp.test(controls.value)){
+return null;
+}else{
+  return { 'validateEmail': true}
+}
+}
+
+validateUsername(controls){
+  const regExp = new RegExp(/^[a-zA-Z0-9]+$/);
+ if(regExp.test(controls.value)){
+ return null;
+ }else{
+   return { 'validateUsername': true}
+ }
+ }
+ validatePassword(controls){
+  const regExp = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*?[\W]).{8,35}$/);
+ if(regExp.test(controls.value)){
+ return null;
+ }else{
+   return { 'validatePassword': true}
+ }
+ }
+
+ matchingPasswords(password, confirm){
+return (group: FormGroup) => {
+  if(group.controls[password].value === group.controls[confirm].value){
+    return null;
+  }else{
+    return { 'matchingPasswords': true}
+  }
+}
+ }
+
+ updateUserSubmit(){
+  this.processing = true;
+  this.disableForm();
+  const user = {
+    email: this.form.get('email').value,
+    username: this.form.get('username').value,
+    password: this.form.get('password').value,
+    address: this.form.get('addresss').value
+  }
+  
+ this.authService.editUser(user).subscribe(data => {
   if(!data.success){
     this.messageClass = 'alert alert-danger';
     this.message = data.message;
     this.processing = false;
+    this.enableForm();
   }else{
     this.messageClass = 'alert alert-success';
     this.message = data.message;
@@ -36,12 +131,40 @@ this.authService.editUser(this.user).subscribe(data =>{
       this.router.navigate(['/user']);
     }, 2000)
   }
-})
 
+
+ });
+ 
 }
-  goBack(){
-this.location.back();
-  }
+
+checkEmail(){
+  this.authService.checkEmail(this.form.get('email').value).subscribe(data =>{
+    if(!data.success){
+      this.emailValid=false;
+      this.emailMessage = data.message;
+    }else{
+      this.emailValid=true;
+      this.emailMessage = data.message;
+    }
+  })
+}
+checkUsername(){
+  this.authService.checkUsername(this.form.get('username').value).subscribe(data =>{
+    if(!data.success){
+      this.usernameValid=false;
+      this.usernameMessage = data.message;
+    }else{
+      this.usernameValid=true;
+      this.usernameMessage = data.message;
+    }
+  })
+} 
+
+goBack(){
+  this.location.back();
+    }
+  
+  
   ngOnInit() {
     this.currentUrl = this.activatedRoute.snapshot.params;
     this.authService.getSingleUser(this.currentUrl.id).subscribe(data =>{
@@ -50,7 +173,7 @@ this.location.back();
         this.message = 'User not found.';
 
       }else{
-        this.user = data.user;
+        this.euser = data.user;
         this.loading = false;
       }
      

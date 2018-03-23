@@ -6,21 +6,45 @@
 </div>
 </div>
 
-<form (submit)="updateUserSubmit()" *ngIf="!loading">
-  <div class="form-group">
-    <label for="Email">Email</label>
-    <input [disabled]="processing" type="text" name="email" class="form-control"
-    [(ngModel)]="user.email" />
-  </div>
-  <div class="form-group">
-    <label for="Username">Username</label>
-    <input [disabled]="processing" type="text" name="username" class="form-control"
-    [(ngModel)]="user.username" />
-  </div>
-  
-  <div class="form-group">
-      <a [routerLink]="['/delete-user/', user._id]"><button [disabled]="processing" type="button" name="button" class="btn btn-danger">Delete</button></a>
-      <button [disabled]="processing" type="button" name="button" class="btn btn-success" (click)="goBack()">Go Back</button>
-      <button [disabled]="processing" type="submit" name="save" class="btn btn-info">Save Changes</button>
+<form  (submit)="updateUserSubmit()">
+ <div [formGroup]="form">
+  <label class="center-block">Username </label>
+   
+  <input type="text" name="username" class="form-control" formControlName="username" placeholder="*Username"  (blur)="checkUsername()">
+  <input [(ngModel)]="euser.username" [ngModelOptions]="{standalone: true}">
+ </div>
+   
+    <div [formGroup]="form">
+      <label class="center-block">Email </label>
+   
+      <input type="text" name="email" class="form-control" formControlName="email" placeholder="Email"  [(ngModel)]="euser.email" (blur)="checkEmail()">
+      
     </div>
+    <div [formGroup]="form">
+      <label class="center-block">Password  </label>
+   
+      <input type="password" name="password" class="form-control" formControlName="password" placeholder="*Password">
+        
+    </div>
+    <div [formGroup]="form">
+      <label class="center-block">Confirm Password</label>
+   
+      <input type="password" name="confirm" class="form-control" formControlName="confirm" placeholder="*Confirm Password">
+         
+    </div>
+    <div [formGroup]="form">
+      <label for="Address">Adress</label>
+      <input [disabled]="processing" type="text" name="address" class="form-control"
+      [(ngModel)]="euser.adress" />
+    </div>
+      
+   
+        
+   
+ 
+    <a [routerLink]="['/delete-user/', euser._id]"><button [disabled]="processing" type="button" name="button" class="btn btn-danger">Delete</button></a>
+    <button [disabled]="processing" type="button" name="button" class="btn btn-success" (click)="goBack()">Go Back</button>
+    <button [disabled]="!form.valid || processing || !emailValid || !usernameValid" type="submit" name="save" class="btn btn-info">Save Changes</button>
+ 
+
 </form>

@@ -71,9 +71,9 @@ getAllUsers(){
   loggedIn(){
     return tokenNotExpired();
   }
-  editUser(user) {
+  editUser(euser) {
     this.createAuthenticationHeaders();
-    return this.http.put(this.domain + 'authentication/updateUser/', user, this.options).map(res => res.json());
+    return this.http.patch(this.domain + 'authentication/updateUser/', euser, this.options).map(res => res.json());
   }
   getSingleUser(id){
     this.createAuthenticationHeaders();

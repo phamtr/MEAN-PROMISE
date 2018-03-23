@@ -123,7 +123,7 @@ module.exports = (router) => {
         
     });
 
-    /* MIIDDLEWARE -Used to grab user's token from headers  */
+    /* MIIDDLEWARE -Used to grab user's token from headers */
     router.use((req, res, next) =>{
       const token = req.headers['authorization'];
       //var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers['authorization'];
@@ -140,7 +140,7 @@ module.exports = (router) => {
             });
         }
     });
-    
+     
     router.get('/profile', (req, res) =>{
         User.findOne({ _id: req.decoded.userId }).select('username email').exec((err,user) =>{
             if(err){
@@ -224,9 +224,9 @@ module.exports = (router) => {
    }
 });
         
- router.put('/updateUser', (req, res)=>{
+ router.patch('/updateUser', function(req, res){
                 if(!req.body._id){
-                    res.json({ success: false, message: 'No user id provided'});
+                    res.json({ success: false, message: "No user found" });
                 }else{
                     User.findOne({ _id: req.body._id}, (err, user) =>{
                         if(err){
@@ -235,36 +235,23 @@ module.exports = (router) => {
                             if(!user){
                                 res.json({ success: false, message: 'User id was not found.'});
                             }else{
-                                User.findOne({ _id: req.decoded.userId}, (err, user) =>{
-                                    if(err){
-                                        res.json({ success: false, message: err});
-                                    }else{
-                                        if(!user){
-                                            res.json({ success: false, message: 'Unable to authenticate user.'});
-                                        }else{
-                                            if(user.admin !== true){
-                                                res.json({ success: false, message: 'You are not authorized to edit this blog post.'});
-                                            }else{
-                                                user.email = req.body.email;
-                                                user.username = req.body.username;
-                                                user.password = req.body.password;
-                                                user.address = req.body.username;
-                                                user.telephone = req.body.telephone;
-                                                user.companyname = req.body.companyname;
-                                                user.admin = req.body.admin;
-                                                user.active = req.body.active;
+                                user.email = req.body.email;
+                                user.username = req.body.username;
+                                user.password = req.body.password;
+                                user.address = req.body.username;
+                                user.telephone = req.body.telephone;
+                                user.companyname = req.body.companyname;
+                                user.admin = req.body.admin;
+                                user.active = req.body.active;
 
-                                                user.save((err) =>{
-                                                    if(err){
-                                                        res.json({ success: false, message: err});
-                                                    }else{
-                                                        res.json({ success: true, message: 'User Updated!'});
-                                                    }
-                                                });
-                                            }
-                                        }
+                                user.save((err) =>{
+                                    if(err){
+                                        res.json({ success: false, message: "No2"});
+                                    }else{
+                                        res.json({ success: true, message: 'User Updated!'});
                                     }
                                 });
+
                             }
                         }
                     });
