@@ -224,37 +224,23 @@ module.exports = (router) => {
    }
 });
         
- router.patch('/updateUser', function(req, res){
-                if(!req.body._id){
+ router.put('/updateUser/:id', (req, res)=>{
+                if(!req.params.id){
                     res.json({ success: false, message: "No user found" });
                 }else{
-                    User.findOne({ _id: req.body._id}, (err, user) =>{
-                        if(err){
-                            res.json({ success: false, message: 'Not a valid user id'});
-                        }else{
-                            if(!user){
-                                res.json({ success: false, message: 'User id was not found.'});
-                            }else{
-                                user.email = req.body.email;
-                                user.username = req.body.username;
-                                user.password = req.body.password;
-                                user.address = req.body.username;
-                                user.telephone = req.body.telephone;
-                                user.companyname = req.body.companyname;
-                                user.admin = req.body.admin;
-                                user.active = req.body.active;
-
-                                user.save((err) =>{
-                                    if(err){
-                                        res.json({ success: false, message: "No2"});
-                                    }else{
-                                        res.json({ success: true, message: 'User Updated!'});
-                                    }
-                                });
-
-                            }
-                        }
-                    });
+                    
+                    User.update({ _id: req.params.id}, {$set: { address: 'Hanoi'}})
+                        .exec()
+                        .then(result =>{
+                            console.log(result);
+                            res.status(200).json({
+                                message: 'Update user!'
+                            });
+                        })
+                        .catch(err =>{
+                        console.log(JSON.parse(err));
+                        })
+                    
                 }
             });
                    

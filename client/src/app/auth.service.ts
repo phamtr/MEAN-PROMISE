@@ -11,6 +11,7 @@ export class AuthService {
   authToken;
   user;
   options;
+  euser;
 
   constructor(private http: Http) { }
 createAuthenticationHeaders(){
@@ -73,7 +74,7 @@ getAllUsers(){
   }
   editUser(euser) {
     this.createAuthenticationHeaders();
-    return this.http.patch(this.domain + 'authentication/updateUser/', euser, this.options).map(res => res.json());
+    return this.http.put(this.domain + 'authentication/updateUser/' + euser._id, euser, this.options).map(res => res.json());
   }
   getSingleUser(id){
     this.createAuthenticationHeaders();
