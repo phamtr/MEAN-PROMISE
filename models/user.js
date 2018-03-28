@@ -103,7 +103,8 @@ address: { type: String},
 telephone: { type: String},
 companyname: { type: String},
 admin: {type: Boolean},
-active: {type: Boolean}
+active: {type: Boolean},
+createdAt: { type: Date, default: Date.now() }
 });
 
 userSchema.pre('save', function(next){

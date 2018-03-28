@@ -1,0 +1,35 @@
+<h2 class="page-header">Delete User</h2>
+
+<div class="row show-hide-message" *ngIf="message">
+<div [ngClass]="messageClass">
+{{message}}
+</div>
+</div>
+<br />
+<div class="col-md-6" *ngIf="foundUser">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Confirm</h4>
+    </div>
+    <div class="modal-body">
+      <p>Are you sure you would like to delete this user?</p>
+    </div>
+    <div class="modal-footer">
+      <button [disabled]="processing" type="button" name="button" class="btn btn-success" (click)="deleteUser()">Yes</button>
+      <a routerLink="/user"><button [disabled]="processing" type="button" name="button" class="btn btn-danger">No</button></a> 
+    </div>
+  </div>
+
+<br />
+<div class="panel panel-primary">
+<div class=" panel-heading">
+<h3 class="panel-title">{{ user.username }}</h3>
+</div>
+<div class="panel-body">
+{{ user.email }}
+</div>
+<div>
+  <strong>Date: </strong>{{ user.createdAt | date: 'MMM dd, yyyy' }}
+</div>
+</div>
+</div>

@@ -76,6 +76,10 @@ getAllUsers(){
     this.createAuthenticationHeaders();
     return this.http.put(this.domain + 'authentication/updateUser/' + euser._id, euser, this.options).map(res => res.json());
   }
+  deleteUser(id){
+    this.createAuthenticationHeaders();
+    return this.http.delete(this.domain + 'blogs/deleteUser/' + id, this.options).map(res =>res.json());
+  }
   getSingleUser(id){
     this.createAuthenticationHeaders();
     return this.http.get(this.domain + 'authentication/singleUser/' + id, this.options).map(res =>res.json());

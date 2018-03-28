@@ -10,6 +10,7 @@
         <th class="text-center">Address</th>
         <th class="text-center">Telephone</th>
         <th class="text-center">Companyname</th>
+        <th class="text-center">Created At</th>
         <th class="text-center">Admin</th>
         <th class="text-center">Active</th>
         <th class="text-center">&nbsp;</th>
@@ -24,6 +25,7 @@
         <td>{{ user.address }}</td>
         <td>{{ user.telephone }}</td>
         <td>{{ user.companyname }}</td>
+        <td>{{ user.createdAt | date }}</td>
         <td>{{ user.admin }}</td>
         <td>{{ user.active }}</td>
         <td>
@@ -32,7 +34,7 @@
               </button>
         </td>
         <td>
-          <button  class="btn btn-danger" (click)="deleteUser(id)">
+          <button [routerLink]="['/delete-user/', user._id]" class="btn btn-danger" (click)="deleteUser(id)">
                        <i class="glyphicon glyphicon-minus">-</i>
             </button>
         </td>

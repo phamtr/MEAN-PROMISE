@@ -50,6 +50,7 @@
 
   
   <div class="form-group">
+      <a [routerLink]="['/delete-user/', user._id]"><button [disabled]="processing" type="button" name="button" class="btn btn-danger">Delete</button></a>
       <button [disabled]="processing" type="button" name="button" class="btn btn-success" (click)="goBack()">Go Back</button>
       <button [disabled]="processing" type="submit" name="save" class="btn btn-info">Save Changes</button>
     </div>

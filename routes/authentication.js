@@ -191,7 +191,7 @@ module.exports = (router) => {
         if(!req.params.id){
             res.json({ success: false, message: 'No id provided'});
         }else{
-            Blog.findOne({_id: req.params.id }, (err, user) =>{
+            User.findOne({_id: req.params.id }, (err, user) =>{
         if(err){
             res.json({ success: false, message: 'Invalid id'});
         }else{

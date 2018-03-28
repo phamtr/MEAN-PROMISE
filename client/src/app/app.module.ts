@@ -24,6 +24,7 @@ import { LogincompanyComponent } from './logincompany/logincompany.component';
 import { UserComponent } from './user/user.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
 import { AdminguardService } from './adminguard.service';
+import { DeleteuserComponent } from './deleteuser/deleteuser.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AdminguardService } from './adminguard.service';
     PublicProfileComponent,
     LogincompanyComponent,
     UserComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    DeleteuserComponent
   ],
   imports: [
     BrowserModule,
