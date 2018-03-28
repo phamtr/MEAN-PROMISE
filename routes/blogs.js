@@ -91,6 +91,8 @@ module.exports = (router) =>{
      
     });
     router.put('/updateBlog', (req, res)=>{
+        console.log(req.body);
+        console.log(req.body._id);
         if(!req.body._id){
             res.json({ success: false, message: 'No blog id provided'});
         }else{

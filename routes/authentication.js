@@ -142,7 +142,7 @@ module.exports = (router) => {
     });
      
     router.get('/profile', (req, res) =>{
-        User.findOne({ _id: req.decoded.userId }).select('username email').exec((err,user) =>{
+        User.findOne({ _id: req.decoded.userId }).select('username email admin').exec((err,user) =>{
             if(err){
                 res.json({ success: false, message: err});
             }else{
@@ -159,7 +159,7 @@ module.exports = (router) => {
         if(!req.params.username){
             res.json({ success: false, message: 'No username was provided'});
         }else{
-            User.findOne({ username: req.params.username }).select('username email').exec((err, user) =>{
+            User.findOne({ username: req.params.username }).select('username email admin').exec((err, user) =>{
                 if(err){
                     res.json({ success: false, message: 'Something went wrong'});
                 }else{
@@ -225,15 +225,29 @@ module.exports = (router) => {
 });
         
  router.put('/updateUser/:id', (req, res)=>{
-                if(!req.params.id){
+    var obj;
+   console.log(req.params);
+   for (var key in req.body) {
+   obj =JSON.parse(key);
+  }
+ console.log(obj);
+     console.log(req.body);
+     
+                if(!obj._id){
                     res.json({ success: false, message: "No user found" });
                 }else{
                     
-                    User.update({ _id: req.params.id}, {$set: { address: 'Hanoi'}})
+                    User.update({ _id: req.params.id}, {$set: { address: obj.address + ' in Hanoi',   
+                companyname: obj.companyname,
+                username: obj.username,
+                telephone: obj.telephone,
+                admin: obj.admin,
+                 active: obj.active}})
                         .exec()
                         .then(result =>{
                             console.log(result);
                             res.status(200).json({
+                                success: true,
                                 message: 'Update user!'
                             });
                         })

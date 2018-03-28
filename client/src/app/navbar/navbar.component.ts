@@ -9,7 +9,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+admin: boolean = false;
   constructor(public authService: AuthService, private router: Router,
   private flashMessagesService: FlashMessagesService) { }
   onLogoutClick(){
@@ -19,6 +19,9 @@ this.router.navigate(['/']);
   }
 
   ngOnInit() {
+    this.authService.getProfile().subscribe(profile =>{
+      this.admin = profile.user.admin;
+    });
   }
 
 }

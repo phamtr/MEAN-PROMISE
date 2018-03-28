@@ -7,12 +7,11 @@
         <th class="text-center">ID</th>
         <th class="text-center">Username</th>
         <th class="text-center">Email</th>
-        <th class="text-center">Password</th>
         <th class="text-center">Address</th>
         <th class="text-center">Telephone</th>
         <th class="text-center">Companyname</th>
-        <th class="text-center">admin</th>
-        <th class="text-center">Actvate</th>
+        <th class="text-center">Admin</th>
+        <th class="text-center">Active</th>
         <th class="text-center">&nbsp;</th>
         <th class="text-center">&nbsp;</th>
       </tr>
@@ -22,12 +21,11 @@
         <td>{{ i+1 }}</td>
         <td>{{ user.username }}</td>
         <td>{{ user.email }}</td>
-        <td>{{ user.password }}</td>
         <td>{{ user.address }}</td>
         <td>{{ user.telephone }}</td>
         <td>{{ user.companyname }}</td>
         <td>{{ user.admin }}</td>
-        <td>{{ user.activate }}</td>
+        <td>{{ user.active }}</td>
         <td>
           <button [routerLink]="['/update-user/', user._id]"  class="btn btn-info">
                        <span class="glyphicon glyphicon-plus">Edit</span>

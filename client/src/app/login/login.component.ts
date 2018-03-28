@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { AuthGuard } from '../auth.guard';
+import { AdminguardService } from '../adminguard.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   previousUrl;
 
   constructor(private formBuilder: FormBuilder, public authService: AuthService
-    , private router: Router, private authGuard: AuthGuard) { this.createForm(); }
+    , private router: Router, private authGuard: AuthGuard, private adminguardService: AdminguardService) { this.createForm(); }
   createForm(){
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
@@ -61,7 +62,10 @@ export class LoginComponent implements OnInit {
           
         }, 2000);
       }
-    })
+    });
+    if(this.adminguardService.admin){
+      this.router.navigate([this.previousUrl]);
+    }
   }
   ngOnInit() {
     if(this.authGuard.redirectUrl){

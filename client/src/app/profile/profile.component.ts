@@ -10,13 +10,14 @@ import { Profile } from 'selenium-webdriver/firefox';
 export class ProfileComponent implements OnInit {
   username;
   email;
-
+  admin: boolean = false;
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.authService.getProfile().subscribe(profile =>{
       this.username = profile.user.username;
       this.email = profile.user.email;
+      this.admin = profile.user.admin;
     });
   }
 

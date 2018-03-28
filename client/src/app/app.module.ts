@@ -23,6 +23,7 @@ import { PublicProfileComponent } from './public-profile/public-profile.componen
 import { LogincompanyComponent } from './logincompany/logincompany.component';
 import { UserComponent } from './user/user.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
+import { AdminguardService } from './adminguard.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import { UpdateUserComponent } from './update-user/update-user.component';
     FlashMessagesModule.forRoot()
 
   ],
-  providers: [AuthService, AuthGuard, NotAuthGuard, BlogService, ProductService],
+  providers: [AuthService, AuthGuard, NotAuthGuard, BlogService, ProductService, AdminguardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
