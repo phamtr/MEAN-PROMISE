@@ -29,9 +29,12 @@ export class DeleteuserComponent implements OnInit {
       }else{
         this.messageClass = 'alert alert-success';
         this.message = data.message;
-        setTimeout(() =>{
-          this.router.navigate(['/user']);
-        }, 2000)
+        var promise = new Promise((resolve, reject) => {
+          setTimeout(() => {
+           this.router.navigate(['/user']);
+          resolve();
+          }, 1000);
+          });          
       }
     });
 
