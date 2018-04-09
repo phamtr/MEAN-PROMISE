@@ -23,8 +23,12 @@ import { PublicProfileComponent } from './public-profile/public-profile.componen
 import { LogincompanyComponent } from './logincompany/logincompany.component';
 import { UserComponent } from './user/user.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
-import { AdminguardService } from './adminguard.service';
+import { AdminguardService } from './adminguard.guard';
 import { DeleteuserComponent } from './deleteuser/deleteuser.component';
+import { AdvertisementComponent } from './advertisement/advertisement.component';
+import { LogincompanyGuard } from '../app/logincompany.guard';
+import { StaffcompanyGuard } from '../app/staffcompany.guard';
+import { ProductListComponent } from './guards/product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,9 @@ import { DeleteuserComponent } from './deleteuser/deleteuser.component';
     LogincompanyComponent,
     UserComponent,
     UpdateUserComponent,
-    DeleteuserComponent
+    DeleteuserComponent,
+    AdvertisementComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +59,9 @@ import { DeleteuserComponent } from './deleteuser/deleteuser.component';
     FlashMessagesModule.forRoot()
 
   ],
-  providers: [AuthService, AuthGuard, NotAuthGuard, BlogService, ProductService, AdminguardService],
+  providers: [AuthService, AuthGuard, NotAuthGuard, BlogService,
+    StaffcompanyGuard,
+     ProductService, AdminguardService, LogincompanyGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

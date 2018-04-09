@@ -19,16 +19,15 @@ mongoose.connect(config.uri, (err) =>{
         console.log('Connected to database: ' + config.db);
     }
 });
-app.use(cors({
-    origin: 'http://localhost:4200'
-}));
+
+
+app.use(cors());
+//app.use(corsPermission);
 
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
 app.use(bodyParser.json())
-
-
 app.use(express.static(__dirname + '/public'));
 app.use('/authentication', authentication);
 app.use('/blogs', blogs);

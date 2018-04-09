@@ -143,7 +143,7 @@ module.exports = (router) => {
     });
      
     router.get('/profile', (req, res) =>{
-        User.findOne({ _id: req.decoded.userId }).select('username email admin').exec((err,user) =>{
+        User.findOne({ _id: req.decoded.userId }).select('username email admin companyname').exec((err,user) =>{
             if(err){
                 res.json({ success: false, message: err});
             }else{
@@ -238,7 +238,7 @@ module.exports = (router) => {
                     res.json({ success: false, message: "No user found" });
                 }else{
                     
-                    User.update({ _id: req.params.id}, {$set: { address: obj.address + ' in Hanoi',   
+                    User.update({ _id: req.params.id}, {$set: { address: obj.address,   
                 companyname: obj.companyname,
                 username: obj.username,
                 telephone: obj.telephone,

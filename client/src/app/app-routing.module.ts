@@ -17,16 +17,27 @@ import { NotAuthGuard } from './notAuth.guard';
 import { PublicProfileComponent } from './public-profile/public-profile.component';
 import { LogincompanyComponent } from './logincompany/logincompany.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
-import { AdminguardService } from './adminguard.service';
+import { AdminguardService } from './adminguard.guard';
+import { AdvertisementComponent } from './advertisement/advertisement.component';
+import { StaffcompanyGuard } from './staffcompany.guard';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
-   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],   
+    {
+      path: 'guards',
+      loadChildren: 'app/guards/guards.module#GuardsModule'
+    },
+   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
       children: [
         {
           path: 'logincompany',
           component: LogincompanyComponent,
+           
         },
+        {
+          path: '',
+          component: AdvertisementComponent
+        }
       ]
      },
    { path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard] },
@@ -54,7 +65,7 @@ const appRoutes: Routes = [
           ),
           CommonModule
     ],
-    providers: [AuthGuard, NotAuthGuard],
+    providers: [AuthGuard, NotAuthGuard, AdminguardService, StaffcompanyGuard],
     bootstrap: [],
     exports: [RouterModule]
   })

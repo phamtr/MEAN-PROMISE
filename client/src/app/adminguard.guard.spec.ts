@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { AdminguardService } from './adminguard.service';
+import { AdminguardService } from './adminguard.guard';
 
 describe('AdminguardService', () => {
   beforeEach(() => {
