@@ -27,8 +27,6 @@ import { AdminguardService } from './adminguard.guard';
 import { DeleteuserComponent } from './deleteuser/deleteuser.component';
 import { AdvertisementComponent } from './advertisement/advertisement.component';
 import { LogincompanyGuard } from '../app/logincompany.guard';
-import { StaffcompanyGuard } from '../app/staffcompany.guard';
-import { ProductListComponent } from './guards/product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -47,8 +45,7 @@ import { ProductListComponent } from './guards/product-list/product-list.compone
     UserComponent,
     UpdateUserComponent,
     DeleteuserComponent,
-    AdvertisementComponent,
-    ProductListComponent
+    AdvertisementComponent
   ],
   imports: [
     BrowserModule,
@@ -57,10 +54,8 @@ import { ProductListComponent } from './guards/product-list/product-list.compone
     FormsModule,
     HttpModule,
     FlashMessagesModule.forRoot()
-
   ],
   providers: [AuthService, AuthGuard, NotAuthGuard, BlogService,
-    StaffcompanyGuard,
      ProductService, AdminguardService, LogincompanyGuard],
   bootstrap: [AppComponent]
 })

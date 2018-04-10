@@ -19,14 +19,9 @@ import { LogincompanyComponent } from './logincompany/logincompany.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
 import { AdminguardService } from './adminguard.guard';
 import { AdvertisementComponent } from './advertisement/advertisement.component';
-import { StaffcompanyGuard } from './staffcompany.guard';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
-    {
-      path: 'guards',
-      loadChildren: 'app/guards/guards.module#GuardsModule'
-    },
    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],
       children: [
         {
@@ -65,7 +60,7 @@ const appRoutes: Routes = [
           ),
           CommonModule
     ],
-    providers: [AuthGuard, NotAuthGuard, AdminguardService, StaffcompanyGuard],
+    providers: [AuthGuard, NotAuthGuard, AdminguardService],
     bootstrap: [],
     exports: [RouterModule]
   })
